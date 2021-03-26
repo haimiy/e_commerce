@@ -1,3 +1,14 @@
+<?php
+
+use App\Http\Controllers\ProductController;
+$total = 0;
+if (Session::has('user')){
+  $total = ProductController::cartItems();
+}
+
+?>
+
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -8,14 +19,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="/">E-Commerce</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</span></a></li>
-        <li><a href="#">Orders</span></a></li>
+        <li class="active"><a href="/">Home</span></a></li>
+        <li><a href="/my_orders">Orders</span></a></li>
         
 
       </ul>
@@ -26,7 +37,20 @@
         <button type="submit" class="btn btn-default">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Cart(0)</a></li>
+        <li><a href="/cart_list">Cart(<span id="total_cart">{{$total}}</span>)</a></li>
+        @if(Session::has('user'))
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{Session::get('user')['name']}}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">My Profile</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </li>
+      @else
+      <li><a href="/login">Login</a></li>
+      <li><a href="/register">Register</a></li>
+      @endif
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

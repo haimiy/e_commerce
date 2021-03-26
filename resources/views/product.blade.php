@@ -12,7 +12,7 @@
     @foreach($products as $item)
     <div class="item {{$item['id']==2?'active':''}}">
       <a href="detail/{{$item['id']}}">
-      <img class="slider-img" src="{{$item['gallery']}}">
+      <center><img class="slider-img" src="{{$item['gallery']}}"></center>
       <div class="carousel-caption slider-text">
         <h3>{{$item['name']}}</h3>
         <p>{{$item['description']}}</p>
